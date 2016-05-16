@@ -1,0 +1,73 @@
+{% load compress %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html style="overflow-x: hidden; overflow-y: hidden;">
+ <head>
+  <title>{% block title %}WeSTCAT Annotator {% endblock %}</title>
+  
+  <link rel="shortcut icon" href="{{ MEDIA_URL }}img/amcat/favicon.png">
+
+  <!--  CSS -->
+  {% compress css %}
+  <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"  />
+  <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" type="text/css"  />
+  <link href="{% static 'css/base.css' %}" rel="stylesheet" type="text/css" media="screen" />
+  <link href="{% static 'css/datatables.css' %}" rel="stylesheet" type="text/css" media="screen" />
+  <link href="{% static 'css/jquery-ui.css' %}" rel="stylesheet" type="text/css" media="screen" />
+  <link href="{% static 'css/annotator.css' %}" rel="stylesheet" type="text/css" media="screen" />
+  <link href="{% static 'css/jquery.pnotify.default.css' %}" media="all" rel="stylesheet" type="text/css" />
+  {% endcompress %}
+  {% block css %}{% endblock %}
+  
+  <!--  Javascript -->
+  {% compress js %}
+  <script type="text/javascript" src="{% static 'js/annotator/jquery-1.9.1.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/annotator/jquery-ui-1.10.3.custom.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/annotator/jquery.dataTables.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.dataTables.plugins.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/amcat.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/amcat.datatables.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/annotator/jquery.scrollTo-1.4.2-min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/annotator/jquery.hotkeys.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.easyMark.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/annotator/functional.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/annotator/annotator.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/annotator/annotator.utils.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/annotator/annotator.widgets.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/annotator/annotator.rules.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/annotator/annotator.autocomplete.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.pnotify.min.js' %}"></script>
+  {% block javascript %}{% endblock %}
+  {% endcompress %}
+ </head>
+ <body>
+  <div id="header">
+   <div class="Row">
+		<div id="logo-wrapper" class="Column" style="cursor: pointer;">
+			<div id="logo-headline">WeSTCAT Annotator</div>
+			<div id="logo-byline">1.0</div>
+		</div>
+	   	<div class="Column"> 
+			<div style="margin-top: 5px; text-align: center;">
+				<span style="font-size: 120%; font-weight: bold;">Articles in codingjob {{codingjob.id}} - {{codingjob.name}} <button id="hide-articles-button" ><i class="fa fa-chevron-up" title="hide"></i></button></span>
+			</div>
+		</div>
+		<div style="float: right; margin-top: -5px; margin-right: 5px;" class="Column">
+			<div class="article-list-toolbar">
+				<button id="previous-article-button" title="Go to the previous article in the list"><i class="fa fa-angle-double-left"></i>
+				</button>
+				<button id="next-article-button" title="Go to the next article in the list"><i class="fa fa-angle-double-right"></i></button>
+				<button id="help-button"><i class="fa fa-question-circle" title="Help"></i> </button>
+			</div>
+		</div>
+   </div>
+  </div>
+    <div id="message-wrap">
+     {% block message %}{% endblock %}
+    </div>
+   <div id="content">
+    {% block content %}<p>Not yet implemented.</p>{% endblock %}
+   </div>
+ </body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "datatables",
+  "_cacheHeaders": {
+    "ETag": "\"55630409-1850a5\"",
+    "Last-Modified": "Mon, 25 May 2015 11:14:17 GMT",
+    "Content-Length": "1593509",
+    "Content-Type": "application/zip"
+  },
+  "_release": "e-tag:55630409-",
+  "_source": "http://hmbastiaan.nl/martijn/downloads/DataTables-1.10.7.zip",
+  "_target": "*",
+  "_originalSource": "http://hmbastiaan.nl/martijn/downloads/DataTables-1.10.7.zip"
+}

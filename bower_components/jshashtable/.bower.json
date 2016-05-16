@@ -1,0 +1,13 @@
+{
+  "name": "jshashtable",
+  "homepage": "https://github.com/timdown/jshashtable",
+  "_release": "4b0552c122",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "4b0552c1228654e0989d281885df9b7e156f115e"
+  },
+  "_source": "git://github.com/timdown/jshashtable.git",
+  "_target": "*",
+  "_originalSource": "git://github.com/timdown/jshashtable.git"
+}

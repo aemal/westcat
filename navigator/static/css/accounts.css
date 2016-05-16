@@ -1,0 +1,16 @@
+#inputs{
+    text-align: center;
+}
+
+.error{
+    color:red;
+}
+
+.login_help {float: left; width: 300px}
+.login_buttons {border-left: 1px solid #ccc; padding-left: 15px; float:right; width: 310px; height: 320px}
+.login_head {}
+.login_foot {padding-top: 1em}
+
+.login_help p {text-align: left}
+
+.login_columns {height: 320px}

@@ -1,0 +1,22 @@
+{% load compress %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>AmCAT {% block page %}{% endblock %}</title>
+{% compress css %}
+  <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+  <link type="text/css" rel="stylesheet" href="{% static 'css/accounts.css' %}" />
+{% endcompress %}
+{% compress js %}
+  <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+{% endcompress %}
+ </head>
+ <body>
+  <div id="container">
+   <div id="logo"></div>
+   {% block content %}
+   {% endblock content %}
+  </div>
+ </body>
+</html>

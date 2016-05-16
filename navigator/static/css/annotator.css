@@ -1,0 +1,418 @@
+/*
+###########################################################################
+#          (C) Vrije Universiteit, Amsterdam (the Netherlands)            #
+#                                                                         #
+# This file is part of AmCAT - The Amsterdam Content Analysis Toolkit     #
+#                                                                         #
+# AmCAT is free software: you can redistribute it and/or modify it under  #
+# the terms of the GNU Affero General Public License as published by the  #
+# Free Software Foundation, either version 3 of the License, or (at your  #
+# option) any later version.                                              #
+#                                                                         #
+# AmCAT is distributed in the hope that it will be useful, but WITHOUT    #
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or   #
+# FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public     #
+# License for more details.                                               #
+#                                                                         #
+# You should have received a copy of the GNU Affero General Public        #
+# License along with AmCAT.  If not, see <http://www.gnu.org/licenses/>.  #
+###########################################################################
+*/
+
+body{
+    background-image:none; /* overwrite value from base.css */
+}
+
+#content{
+    /* overwrite values from base.css */
+    margin-left:5px;
+    width:100%;
+    float:none;
+    position:inline;
+    margin-right:0px;
+	margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+html {
+    overflow-y: scroll;
+}
+
+#warning{
+    color:red;
+    position:absolute;
+    top:15px;
+    left:550px;
+}
+
+.annotator-content{
+    width:99%;
+    padding:0px 5px;
+	margin-top: 5px;
+}
+
+
+.dataTables_wrapper{
+    border: 1px solid gray;
+}
+
+#coding {
+    display: none;
+}
+
+#coding h1 {
+    border-style: none;
+}
+
+.articlelist-part{
+    overflow-x:auto;
+    width:100%;
+    background:white;
+    margin-bottom:20px;
+}
+
+.coding-part, #coding-details{
+    width:350px;
+    background:white;
+    float:left;
+    height: 100%;
+}
+
+.coding-part{
+    border:none 3px #ccc;
+    border-right-style:solid;
+    margin-right:5px;
+}
+
+article{
+    overflow: hidden;
+    background:white;
+    right:10px;
+    height:90%;
+    border:none 3px #ccc;
+    border-left-style:solid;
+    margin-left:5px;
+    padding-left: 7px;
+}
+
+.highlight{
+    background-color: #A5FAB6;
+}
+
+.sentences{
+    overflow-y:auto;
+    height:100%;
+}
+
+.sentences .active{
+    background-color: #d9edf7;
+}
+
+.coding td{
+    -moz-border-radius:10px 0 0 10px;
+    padding:1px 5px !important;
+    vertical-align: text-top;
+    width: 105px;
+}
+
+#article-comment-form label{
+    margin-right: 5px;
+}
+
+.coding label{
+    cursor: pointer;
+}
+
+.coding-table{
+    font-size:11px;
+    text-align:left;
+}
+
+.coding-table input{
+    font-size:11px;
+}
+
+.sentence{
+    
+}
+
+.annotator-sentencenr{
+    color:gray;
+}
+
+.articlelist-part h2{
+    float:left;
+    width:50%;
+    border: none;
+}
+
+.article-list-toolbar{
+    float:right;
+    width:350px;
+    font-size: 18px;
+    text-align:right;
+    padding-top: 10px;
+}
+
+.coding-part h2{
+    float:left;
+    width:70px;
+}
+
+.unit-codings-toolbar{
+    float:left;
+    font-size: 16px;
+    text-align:right;
+}
+
+table.display thead th {
+    cursor: default !important;
+}
+.selected-sentence{
+    background-color:blue;
+    color:white;
+}
+
+#codingjob-list-table{
+    width:800px;
+}
+#codingjob-list-table td{
+    padding:5px 2px 5px;
+}
+
+#welcome{
+    margin-bottom:50px;
+}
+
+#article-irrelevant-input{
+    margin-left:40px;
+}
+
+.links{
+    font-size: 15px;
+}
+
+#coding-type-radios{
+    margin-right:80px !important;
+}
+
+#article-comment-input{
+    width:60%;
+}
+
+#article-comment-form{
+    clear:both;
+    padding-top:4px;
+    margin-bottom:20px;
+}
+
+
+#article-coding{
+    margin-bottom:30px;
+    clear:both;
+    float: left;
+}
+
+#coding-details hr {
+    margin: 5px;
+}
+
+#coding-details h1 {
+    margin-top: 0px;
+}
+
+#unitcoding-table-part{
+    margin-bottom:30px;
+    clear:both;
+    margin-top:5px;
+}
+
+.ui-autocomplete {
+    max-height: 250px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+    font-size:11px;
+    /*max-width:300px;*/
+}
+
+#unitcoding-table{
+    width:100% !important;
+}
+
+#save-button2{
+    margin-bottom:400px;
+}
+
+
+.articlelist-part tbody tr.even:hover, #codingjob-list-table tbody tr.even:hover{
+	background-color: #ECFFB3;
+}
+
+.articlelist-part tbody tr.odd:hover, #codingjob-list-table tbody tr.odd:hover{
+	background-color: #ECFFB3;
+}
+
+#autocomplete-details  ul{
+    margin:5px;
+}
+
+#autocomplete-details h2{
+    font-size:18px;
+}
+
+#autocomplete-details h2 .objid{
+    color:gray;
+}
+
+#autocomplete-details h3{
+    clear:both;
+    font-size:13px;
+    margin:10px 5px 0px;
+    padding-top:15px;
+}
+
+#autocomplete-details{
+    width:300px;
+    position:absolute;
+    
+    display:none; 
+    background:white;
+    border:1px solid black;
+    
+    max-height: 250px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+}
+
+#unitcoding-table-part h3{
+    width: 200px;
+    margin-bottom:5px;
+    float:left;
+    margin:0px;
+}
+
+.unitcoding-table-toolbar{
+    float:right;
+    width:350px;
+    text-align:right;
+    padding:3px;
+}
+
+#unitcoding-table.display tr.row_selected td {
+	background-color: #9FAFD1;
+}
+
+
+.icon-next-article{
+    background-image: url('../img/misc/arrow_down.png') !important;
+}
+
+.icon-previous-article{
+    background-image: url('../img/misc/arrow_up.png') !important;
+}
+
+.icon-edit-article{
+    background-image: url('../img/misc/book_edit.png') !important;
+}
+
+.icon-new-article{
+    background-image: url('../img/misc/book_add.png') !important;
+}
+
+.icon-delete-coding{
+    background-image: url('../img/misc/table_row_delete.png') !important;
+}
+
+.icon-save{
+    background-image: url('../img/misc/disk.png') !important;
+}
+
+.icon-save-continue{
+    background-image: url('../img/misc/page_save.png') !important;
+}
+.icon-irrelevant-continue{
+    background-image: url('../img/misc/page_go.png') !important;
+}
+.icon-add-row{
+    background-image: url('../img/misc/add.png') !important;
+}
+.icon-copy-coding{
+    background-image: url('../img/misc/table_row_insert.png') !important;
+}
+.icon-copy-switch-coding{
+    background-image: url('../img/misc/table_refresh.png') !important;
+}
+
+
+#coding button:focus{
+    border:1px solid blue;
+}
+
+#article-table-container{
+    clear:both;
+    /* max-height:150px;
+    overflow:scroll; */
+   /*  width:95%; */
+}
+#article-table-container td{
+    max-width:200px;
+    cursor: pointer;
+}
+
+.widthlimit{
+    overflow:hidden;
+    white-space:nowrap;
+}
+
+
+.sentence-text-row td{
+    font-size:12px;
+    padding:5px !important;
+    background:white;
+    
+}
+
+.area-widget-input{
+    width:40px;
+}
+
+.new-paragraph{
+    margin-top:10px;
+}
+
+#unitcoding-table thead th{
+    cursor:auto;
+}
+
+.video-container{
+    margin-top:5px;
+}
+
+
+
+/* make sentences table look like a datatable, with colors etc. */
+#unitcoding-table tbody tr {
+    
+}
+
+#unitcoding-table{
+    
+}
+
+#unitcoding-table thead tr:hover {
+   background-color: inherit !important;
+}
+
+#unitcoding-table-top{
+    top:0px;
+    left:0px;
+    background-color:white;
+    z-index:2500;
+    height:25px;
+}
+
+input.error{
+    border-color:red;
+}

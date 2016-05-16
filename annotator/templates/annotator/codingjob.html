@@ -1,0 +1,315 @@
+{% extends "annotator/base.html" %}
+
+{% block content %}
+  
+  <div id="messages">
+   <noscript>
+    <div>
+     <h2>Your browser does not seem to have JavaScript enabled. Please enable it.</h2>
+    </div>
+   </noscript>
+  </div>
+
+  
+ <!--[if lt IE 9]>
+<div class="error">Internet Explorer versions 6, 7 and 8 are not officially supported. Please use Internet Explorer 9, Firefox or Google Chrome.</div>
+<![endif]-->
+
+  <div class="annotator-content">
+    
+    
+    <div class="articlelist-part" id="divArticlePart">
+        
+        
+        <div id="article-table-container">
+        
+        </div>
+        <script type="text/javascript">
+        $(document).ready(function(){
+			
+            var jqueryElement = $('#article-table-container');
+            var url = "{% url "codedarticle-list" project.id codingjob.id %}";
+            var columns = [], column_order = [
+                "id", "article_id", "headline", "medium", "date", "pagenr",
+                "length", "status", "comments"
+            ];
+
+            $.each(column_order, function(i, colname){
+                columns.push({ mData : colname, aTargets : [colname]});
+            });
+
+            amcat.datatables.create_rest_table(jqueryElement, url, {
+                datatables_options: {
+                    aaSorting: [],
+                    iDisplayLength: 100000,
+                    aoColumns: columns,
+                    sScrollY: "100px",
+
+                    fnDrawCallback: function(){
+                        $("tr", $("#article-table-container")).click(function(event){
+                            annotator.datatables_row_clicked($(event.currentTarget));
+                        }).css("cursor", "default");
+                    }
+                },
+                setup_callback: function(tbl){
+                    console.log("Done setting up datatable..");
+                    annotator.datatable = tbl;
+                }
+            });
+        });
+        </script>
+    </div>
+    <hr id="hrElement">
+    <div id="coding">
+
+      <div style="width:70%;" class="alert alert-warning" id="lost-codes">
+          <p><b>Warning</b></p>
+          <p>Some of the codes used in this coded article were not present in the used codebooks, which might
+              result in lost data. This warning typically is the result of moving a code in a codebook, deleting
+              a code from a codebook or changing the type of a codingschemafield. The warning was triggered by
+              the following codingschemafields:</p>
+          <p>
+              <ul class="triggered-by"></ul>
+          </p>
+      </div>
+
+      <div class="coding-part" style="display:none; overflow-y: scroll; height: calc(100vh - 50px); overflow-x: hidden;" >
+           
+           	<div class="unit-codings-toolbar">
+				<button id="irrelevant-button" title="Mark this article as irrelevant and continue to the next article"><i class="fa fa-times"></i></button>
+				<button id="save-continue-button" title="Mark this article as finished and continue to the next article"><i class="fa fa-check"></i></button>
+				<button id="save-button" title="Save the codings for this article"><i class="fa fa-floppy-o"></i> </button>
+			</div>
+
+          
+          <div id="article-comment-form">
+              <h1 for="article-status">Article Status </h1><select id="article-status" name="status" ></select>
+              <h1 for="article-comment">Comments</h1><textarea cols="40" id="article-comment" name="comment" rows="4"></textarea>
+              
+          </div>
+          <h1>Variables</h1>
+           <h3>Article Codings</h3>
+           <div id="article-coding">
+              
+              <form id="article-coding-form">
+              
+              </form>
+
+           </div>
+           <br>
+           <div id="unitcoding-table-part">
+              <h3>Sentence Codings</h3>
+              <div id="unitcoding-table-top">
+                  
+              </div>
+              <div>
+                  <table cellpadding="0" cellspacing="0" border="0" class="display" id="unitcoding-table"></table>
+              </div>
+           </div>
+		  
+		  
+      </div>
+	  
+      <div id="coding-details" style="position: relative;">
+		  
+		 
+		  
+		  
+		<span id="loadingHighlight"><svg width='25px' height='25px' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="uil-default"><rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(0 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(30 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.08333333333333333s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(60 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.16666666666666666s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(90 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.25s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(120 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.3333333333333333s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(150 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.4166666666666667s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(180 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.5s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(210 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.5833333333333334s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(240 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.6666666666666666s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(270 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.75s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(300 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.8333333333333334s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(330 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.9166666666666666s' repeatCount='indefinite'/></rect></svg> <span style="font-size: 25px;"> Loading highlighter... </span></span>
+
+		  
+		  
+	   	<div style="position: absolute; top:0px; right: 10px; text-align: center; display: none;" id="savingSVG">
+			<svg width="25px" height="25px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="uil-default"><rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect><rect x="46.5" y="40" width="7" height="20" rx="5" ry="5" fill="#00b2ff" transform="rotate(0 50 50) translate(0 -30)">  <animate attributeName="opacity" from="1" to="0" dur="1s" begin="0s" repeatCount="indefinite"></animate></rect><rect x="46.5" y="40" width="7" height="20" rx="5" ry="5" fill="#00b2ff" transform="rotate(30 50 50) translate(0 -30)">  <animate attributeName="opacity" from="1" to="0" dur="1s" begin="0.08333333333333333s" repeatCount="indefinite"></animate></rect><rect x="46.5" y="40" width="7" height="20" rx="5" ry="5" fill="#00b2ff" transform="rotate(60 50 50) translate(0 -30)">  <animate attributeName="opacity" from="1" to="0" dur="1s" begin="0.16666666666666666s" repeatCount="indefinite"></animate></rect><rect x="46.5" y="40" width="7" height="20" rx="5" ry="5" fill="#00b2ff" transform="rotate(90 50 50) translate(0 -30)">  <animate attributeName="opacity" from="1" to="0" dur="1s" begin="0.25s" repeatCount="indefinite"></animate></rect><rect x="46.5" y="40" width="7" height="20" rx="5" ry="5" fill="#00b2ff" transform="rotate(120 50 50) translate(0 -30)">  <animate attributeName="opacity" from="1" to="0" dur="1s" begin="0.3333333333333333s" repeatCount="indefinite"></animate></rect><rect x="46.5" y="40" width="7" height="20" rx="5" ry="5" fill="#00b2ff" transform="rotate(150 50 50) translate(0 -30)">  <animate attributeName="opacity" from="1" to="0" dur="1s" begin="0.4166666666666667s" repeatCount="indefinite"></animate></rect><rect x="46.5" y="40" width="7" height="20" rx="5" ry="5" fill="#00b2ff" transform="rotate(180 50 50) translate(0 -30)">  <animate attributeName="opacity" from="1" to="0" dur="1s" begin="0.5s" repeatCount="indefinite"></animate></rect><rect x="46.5" y="40" width="7" height="20" rx="5" ry="5" fill="#00b2ff" transform="rotate(210 50 50) translate(0 -30)">  <animate attributeName="opacity" from="1" to="0" dur="1s" begin="0.5833333333333334s" repeatCount="indefinite"></animate></rect><rect x="46.5" y="40" width="7" height="20" rx="5" ry="5" fill="#00b2ff" transform="rotate(240 50 50) translate(0 -30)">  <animate attributeName="opacity" from="1" to="0" dur="1s" begin="0.6666666666666666s" repeatCount="indefinite"></animate></rect><rect x="46.5" y="40" width="7" height="20" rx="5" ry="5" fill="#00b2ff" transform="rotate(270 50 50) translate(0 -30)">  <animate attributeName="opacity" from="1" to="0" dur="1s" begin="0.75s" repeatCount="indefinite"></animate></rect><rect x="46.5" y="40" width="7" height="20" rx="5" ry="5" fill="#00b2ff" transform="rotate(300 50 50) translate(0 -30)">  <animate attributeName="opacity" from="1" to="0" dur="1s" begin="0.8333333333333334s" repeatCount="indefinite"></animate></rect><rect x="46.5" y="40" width="7" height="20" rx="5" ry="5" fill="#00b2ff" transform="rotate(330 50 50) translate(0 -30)">  <animate attributeName="opacity" from="1" to="0" dur="1s" begin="0.9166666666666666s" repeatCount="indefinite"></animate></rect></svg> <div> Saving...</div>
+		</div>
+		  
+		  
+	  	<h1>Variable Details:</h1> 
+        <div class="keywords"><strong>Keywords:</strong><div></div></div>
+        <div class="description"><strong>Description:</strong><div></div></div>
+      </div>
+
+      <article>
+         <div class="sentence-options">
+			 <button class="select-all-sentences-button" id="btnHighlightKeywords" title="Keywords Missing! You cannot highlight without keywords, please select a question first.">Highlight Keywords</button>
+              <span>Selected words: <span id="wordcount">0</span></span>
+			 &nbsp;
+			 <!-- <button id="btnMaxMin" title="Hide Header"><i class="fa fa-chevron-up" id="iconMaxMin" title="Hide Header"></i></button> -->
+         </div>
+         <div class="sentences" id="divSentences" style="overflow-y: scroll; overflow-x: hidden;  height: calc(100vh - 75px); padding-right: 15px;">
+             <h2>Article Text</h2>
+             <p>No article selected yet</p>
+         </div>
+      </article>
+    </div>
+    
+  </div>
+  
+  
+<div id="autocomplete-details" class="ui-corner-all">
+</div>
+
+<div id="article-dialog-form" style="display:none">
+	<div id="article-edit-form"></div>
+	<div id="article-edit-status"></div>
+</div>
+
+<div id="new-sentence-dialog-form" title="Add new Sentence" style="display:none">
+	<div id="new-sentence-nr-placeholder">
+    </div>
+    <input type="text" id="new-sentence-text" />
+	<div id="new-sentence-status"></div>
+</div>
+
+<div id="message-dialog" title="Message" style="display:none;">
+	<div id="message-dialog-msg"></div>
+</div>
+  
+<div id="dialog-confirm-delete-row" title="Delete this row" style="display:none">
+	<p>Are you sure you would like to delete this row?</p>
+    <p id="confirm-delete-row-content"></p>
+</div>
+
+<div id="dialog-save" title="Saving" style="display:none">
+    <div id="dialog-save-msg"></div>
+</div>
+
+<div id="dialog-help" title="Help" style="display:none">
+    <h4>Keyboard shortcuts</h4>
+    <table>
+        <tr><th>Key</th><th>Explanation</th></tr>
+        <tr><td>CTRL + S</td><td>Save</td></tr>
+        <tr><td>CTRL + D</td><td>Set to complete, save and continue</td></tr>
+        <tr><td>CTRL + I</td><td>Set to irrelevant, save and continue.</td></tr>
+        <tr><td>ESCAPE</td><td>Close a dialog</td></tr>
+        <tr><td>CTRL + ↓</td><td>Add new row in sentence codings table, copying current sentence.</td></tr>
+        <tr><td>CTRL + SHIFT + ↓</td><td>Add new row in sentence codings table, increase sentencenr by one.</td></tr>
+        <tr><td>SHIFT + ↓</td><td>Copy current row.</td></tr>
+        <tr><td>CTRL + SHIFT + d</td><td>Remove row in sentence codings table</td></tr>
+    </table>
+    <br>
+    <h4>Supported Browsers</h4>
+    <p>AmCAT Annotator is tested with the latest versions of Mozilla Firefox, Google Chrome and Internet Explorer.<br />
+    Internet Explorer 6, 7, 8 are not recommended.</p>
+</div>
+
+<div id="unsaved-changes" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Unsaved changes</h4>
+      </div>
+      <div class="modal-body">
+        <p>There are unsaved changes pending. Please choose one of the following options:</p>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-warning discard">Discard</button>
+          <button type="button" class="btn btn-primary save"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+ 
+<script type="text/javascript"> 
+    $(document).ready(function(){
+        annotator.initialise({{ project.id }}, {{ codingjob.id }}, {{ coder.id }}, {{ coder.userprofile.language_id }});
+		
+		//hide horizontal scrollbar of the window, so the vertical scroll bar of the questionnaire list is not disturbed.
+		//$("html").attr("style", "overflow-x: hidden;");
+		$("#btnHighlightKeywords").attr("disabled",true);
+		
+		$("#btnMaxMin").click(function() {
+			$("#lost-codes").hide();
+			$("#divArticlePart").toggle();
+			$("#header").toggle();
+			$("#hrElement").toggle();
+			
+			window.scrollTo(0, 0);
+			if($("#iconMaxMin").attr("class") == "fa fa-chevron-up") {
+				$("#iconMaxMin").attr("class", "fa fa-chevron-down");
+				$("#iconMaxMin").attr("title", "Show Header");
+				$("html").attr("style", "overflow-x: hidden; overflow-y: hidden;");
+			} else {
+				$("#iconMaxMin").attr("class", "fa fa-chevron-up");
+				$("#iconMaxMin").attr("title", "Hide Header");
+				$("html").attr("style", "overflow-x: hidden; overflow-y: scroll;");
+			}
+		});
+		
+		$("#btnHighlightKeywords").click(function() {
+			if($(this).text() == "Highlight Keywords") {
+				var varKeywords = sessionStorage.getItem('keywords');
+				varKeywords = varKeywords.replace(/,/g, "");
+				varKeywords = varKeywords.replace(/  /g, " ");
+				
+				//The easymark removeHighlight is throwing an error if there is no pre-existing highlights, therefore this section is commented out.
+				//$(this).text("Remove Highlighted Keywords");
+				//$("#btnHighlightKeywords").attr("title", "Remove the highlighted keywords of respective question in the article.");
+
+				$("#divSentences").easymark("highlight", varKeywords);
+			} /*else { //The easymark removeHighlight is throwing an error if there is no pre-existing highlights, therefore this section is commented out.
+				sessionStorage.setItem('keywords', '');
+				$(this).text("Highlight Keywords");
+				$("#btnHighlightKeywords").attr("title", "Highlighted keywords of respective question in the article.");
+				
+				try {
+					$("#divSentences").easymark('removeHighlight');				
+				}
+				catch(err) {
+					console.log(err.message);
+				}
+				
+				
+			}*/
+		});
+		
+		$('body').on('change', '.cmbField', function(){
+			//console.log("Article ID: "+sessionStorage.getItem("varCodedArticleID"));
+			//console.log("Field ID: "+$(this).attr('varfieldid'));
+			//console.log("Field Value ID: "+$('option:selected', this).val() );
+			//console.log("aaa--------------------------------------------");
+			$("#savingSVG").show();
+			
+			
+			$.ajax({
+			   type: 'POST',
+			   url: 'http://127.0.0.1:8000/annotator/save/',
+			   //data: { param0:'hi there!', param1:'blah blah', param2:'we get it' },
+		       data: { articleID: sessionStorage.getItem('varCodedArticleID'), fieldID: $(this).attr('varfieldid'), fieldValueID: $('option:selected', this).val() },
+			   error: function() {
+				   //alert("An error occured while saving.");
+				   $("#savingSVG").hide();
+			   },
+			   success: function(data) {
+				  //console.log(data);
+				  $("#savingSVG").hide();
+			   }
+			});
+			
+			
+			
+	   	});
+		
+		
+		$('body').on('blur', '.txtField', function(){
+			//console.log("Article ID: "+sessionStorage.getItem("varCodedArticleID"));
+			//console.log("Field ID: "+$(this).attr('varfieldid'));
+			//console.log("Field Value ID: "+$(this).val());
+			//console.log("--------------------------------------------");
+		});
+		
+		
+		$("#logo-wrapper").click(function() {
+			location = "http://127.0.0.1:8000/";
+		});
+    });
+</script>
+
+ </body>
+</html>
+
+{% endblock %}

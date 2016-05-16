@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="login_head">
+{% if error %}
+<div class="alert alert-error">
+    <p style="margin-bottom:0px;">Could not log you in. Did you forget your username or password? Use <a href="{% url "accounts-recover" %}">this</a> form to reset them.</div>
+{% else %}
+{% endif %}
+<!-- <div class="alert alert-info">{{ announcement|safe }}</div> -->
+
+</div>
+<div class="jumbotron">
+
+<div class="login_help">
+<h1>Welcome to WeSTCAT</h1>
+<p>Please log in or create a new account
+  below. </p>
+</div>
+<div class="login_buttons well">
+ <form method="POST" action = "">
+     <input {% if username %}value="{{username}}"{% endif %} name="username" type="text" class="input-small" placeholder="Username" />
+  <input name="password" type="password" class="input-small" placeholder="Password" />
+  <button type="submit" class="btn">Sign in</button>
+ </form>
+
+or <form method="POST" class="">
+    <a href="{% url "accounts-register" %}" class="btn
+    btn-primary">Create a new Account</a>
+ </form>
+    <small>If you forgot your username or password use
+           <a href="{% url "accounts-recover" %}">this</a> form.
+    </small>
+</p>
+
+
+</div>
+
+{% endblock %}

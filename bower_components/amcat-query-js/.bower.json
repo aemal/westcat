@@ -1,0 +1,43 @@
+{
+  "name": "amcat-query-js",
+  "version": "3.4.1",
+  "homepage": "https://github.com/amcat/amcat-query-js",
+  "authors": [
+    "AmCAT Development Team <amcat-dev@googlegroups.com>"
+  ],
+  "description": "Javascript tools for AmCAT query rendering / fetching.",
+  "main": "api.js",
+  "moduleType": [
+    "amd"
+  ],
+  "license": "AGPL",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "bootstrap": "3.1.1",
+    "datatables": "http://hmbastiaan.nl/martijn/downloads/DataTables-1.10.7.zip",
+    "jquery-csv": "",
+    "highcharts": "4.1.9",
+    "moment": "",
+    "papaparse": "4.1.0",
+    "renderjson": "",
+    "highlight": "",
+    "jquery-cookie": "",
+    "jshashtable": "git://github.com/timdown/jshashtable.git"
+  },
+  "_release": "3.4.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v3.4.1",
+    "commit": "284aab0c6f3ecc7559d90d099ba80ededc77a239"
+  },
+  "_source": "git://github.com/amcat/amcat-query-js.git",
+  "_target": "~3.4.1",
+  "_originalSource": "git://github.com/amcat/amcat-query-js.git"
+}
