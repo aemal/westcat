@@ -1,4 +1,4 @@
-WeSTCAT - Web Science and Technologies Content Analysis Toolkit
+WeSTCAT - Web Science and Technologies Content Analysis Toolkit.
 ==========================================
 
 ## Overview
