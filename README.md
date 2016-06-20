@@ -1,5 +1,8 @@
-WeSTCAT - Amsterdam Content Analysis Toolkit
+WeSTCAT - Web Science and Technologies Content Analysis Toolkit
 ==========================================
+
+## Overview
+WeSTCAT is an extended version of the [https://github.com/amcat/amcat AmCAT] software for human rating ("coding") of texts, originally customized by Christoph Kling, now maintained by Aemal Sayer.
 
 ## Installation and Configuration.
 
