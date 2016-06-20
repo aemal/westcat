@@ -2,7 +2,7 @@ WeSTCAT - Web Science and Technologies Content Analysis Toolkit
 ==========================================
 
 ## Overview
-WeSTCAT is an extended version of the [https://github.com/amcat/amcat AmCAT] software for human rating ("coding") of texts, originally customized by Christoph Kling, now maintained by Aemal Sayer.
+WeSTCAT is an extended version of the AmCAT software for human rating ("coding") of texts, originally customized by Christoph Kling, now maintained by Aemal Sayer.
 
 ## Installation and Configuration.
 
@@ -60,6 +60,9 @@ Now you are ready to start elasticsearch. I usually start it in a secondary term
 ```sh
 ES_CLASSPATH=hitcount.jar elasticsearch-1.0.0/bin/elasticsearch -Des.index.similarity.default.type=nl.vu.amcat.HitCountSimilarityProvider
 ```
+
+If you faced any problem in installing elasticsearch, the following link can be also helpful: 
+https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-elasticsearch-on-ubuntu-14-04
 
 ### Installing AmCAT (pip install from git)
 
