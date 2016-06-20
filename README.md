@@ -2,9 +2,9 @@ WeSTCAT - Web Science and Technologies Content Analysis Toolkit
 ==========================================
 
 ## Overview
-WeSTCAT is an extended version of the AmCAT software for human rating ("coding") of texts, originally customized by Christoph Kling, now maintained by Aemal Sayer.
+WeSTCAT is an extended version of the [AmCAT](https://github.com/amcat/amcat) software for human rating ("coding") of texts, originally customized by Christoph Kling, now maintained by Aemal Sayer.
 
-## Installation and Configuration.
+## Installation and Configuration
 
 ### Prerequisites
 
@@ -97,14 +97,6 @@ Whichever way you installed AmCAT, you need tocall the syncdb command to populat
 python -m amcat.manage syncdb
 ```
 
-### Start AmCAT web server
-
-For debugging, it is easiest to start amcat using runserver:
-
-```sh
-python -m amcat.manage runserver
-```
-
 ### Start celery worker
 
 Finally, to use the query screen you need to start a celery worker. In a new terminal, type:
@@ -115,6 +107,17 @@ celery -A amcat.amcatcelery worker -l info -Q amcat
 
 (if you are using a virtual environment, make sure to `activate` that first)
 
-## Configuring AmCAT
+### Configuring AmCAT
 
 The main configuration parameters for AmCAT reside in the [settings](https://github.com/amcat/amcat/tree/master/settings) folder. In many places, these settings are defaults that can be overridden with environment variables. 
+
+
+## Start WeSTCAT web server
+
+Make sure that elasticsearch and celery worker are running and then execute the following in terminal:
+
+```sh
+export PYTHONPATH=$PYTHONPATH:$HOME/westcat
+export AMCAT_ES_LEGACY_HASH=N
+python -m amcat.manage runserver 0.0.0.0:80
+```
