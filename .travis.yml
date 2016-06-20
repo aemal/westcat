@@ -1,0 +1,40 @@
+language: python
+python:
+  - "2.7"
+
+services:
+ - postgresql
+ - memcached
+ - rabbitmq
+
+virtualenv:
+  system_site_packages: true
+
+env:
+  - SUITE=api
+  - SUITE=accounts
+  - SUITE=annotator
+  - SUITE=amcat
+  - SUITE=navigator
+
+before_install:
+ - psql -c 'create database amcat;' -U postgres
+ - export DJANGO_DB_USER=postgres
+ - export DJANGO_LOG_LEVEL=WARNING
+ - export DJANGO_SETTINGS_MODULE=settings
+ - export PYTHONPATH=
+
+install:
+ - sudo apt-get update
+ - cat apt_requirements.txt | tr '\n' ' ' | xargs sudo apt-get install -y
+ - sudo service rabbitmq-server start
+ - curl https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.0.1.tar.gz | tar xvz
+ - wget http://amcat.vu.nl/plain/hitcount.jar
+ - elasticsearch-1.0.1/bin/plugin -install elasticsearch/elasticsearch-lang-python/1.2.0
+ - elasticsearch-1.0.1/bin/plugin -install elasticsearch/elasticsearch-analysis-icu/1.12.0
+ - elasticsearch-1.0.1/bin/plugin -install mobz/elasticsearch-head
+ - ES_CLASSPATH=hitcount.jar elasticsearch-1.0.1/bin/elasticsearch -Des.index.similarity.default.type=nl.vu.amcat.HitCountSimilarityProvider -d
+ - pip install -r requirements.txt
+
+script:
+ - python -m amcat.manage test ${SUITE}.tests

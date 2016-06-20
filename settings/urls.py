@@ -38,10 +38,12 @@ urlpatterns = patterns(
     '',
     ('^$', RedirectView.as_view(url='navigator')),
     #(r'^westcat/', include('accounts.urls')),
-    (r'^admin/', include(admin.site.urls)),
+    (r'^westcat/admin/', include(admin.site.urls)),
     (r'^accounts/', include('accounts.urls')),
+    (r'^westcat/', include('navigator.urls')),
     (r'^navigator/', include('navigator.urls')),
     (r'^api/', include('api.urls')),
+    (r'^westcat/annotator/', include('annotator.urls')),
     (r'^annotator/', include('annotator.urls')),
     url(r'^restframework', include('rest_framework.urls', namespace='rest_framework'))
     )

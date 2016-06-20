@@ -11,7 +11,7 @@
 # AmCAT is distributed in the hope that it will be useful, but WITHOUT    #
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or   #
 # FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public     #
-# License for more details.                                               #
+# License for more idetails.                                               #
 #                                                                         #
 # You should have received a copy of the GNU Affero General Public        #
 # License along with AmCAT.  If not, see <http://www.gnu.org/licenses/>.  #
@@ -57,7 +57,11 @@ class ArticleSetSerializer(AmCATModelSerializer):
 
     def n_articles(self, articleset):
         if not articleset: return None
-        return self.get_nn().get(articleset.id)
+        try:
+			return self.get_nn().get(articleset.id)
+        except:
+            pass
+
 
     def is_favourite(self, articleset):
         if not articleset or not self.project: return None

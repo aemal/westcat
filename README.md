@@ -1,7 +1,7 @@
-AmCAT - Amsterdam Content Analysis Toolkit
+WeSTCAT - Amsterdam Content Analysis Toolkit
 ==========================================
 
-## Installation and Configuration
+## Installation and Configuration.
 
 ### Prerequisites
 
