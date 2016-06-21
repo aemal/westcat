@@ -277,7 +277,7 @@
 			
 			$.ajax({
 			   type: 'POST',
-			   url: 'http://127.0.0.1:8000/annotator/save/',
+			   url: 'http://komepol.west.uni-koblenz.de/annotator/save/',
 			   //data: { param0:'hi there!', param1:'blah blah', param2:'we get it' },
 		       data: { articleID: sessionStorage.getItem('varCodedArticleID'), fieldID: $(this).attr('varfieldid'), fieldValueID: $('option:selected', this).val() },
 			   error: function() {
