@@ -40,7 +40,7 @@ urlpatterns = patterns(
     ('^$', 'westcat/accounts/login'),
     #(r'^westcat/', include('accounts.urls')),
     (r'^westcat/admin/', include(admin.site.urls)),
-    (r'^westcat/accounts/', include('accounts.urls')),
+    (r'^accounts/', include('accounts.urls')),
     (r'^westcat/', include('navigator.urls')),
     (r'^navigator/', include('navigator.urls')),
     (r'^api/', include('api.urls')),
