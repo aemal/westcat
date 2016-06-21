@@ -36,8 +36,7 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    #('^$', RedirectView.as_view(url='navigator')),
-    ('^$', 'westcat/accounts/login'),
+    ('^$', RedirectView.as_view(url='navigator')),
     #(r'^westcat/', include('accounts.urls')),
     (r'^westcat/admin/', include(admin.site.urls)),
     (r'^accounts/', include('accounts.urls')),
