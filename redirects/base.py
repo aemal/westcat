@@ -147,7 +147,7 @@ PASSWORD_HASHERS = (
 )
 
 AUTH_PROFILE_MODULE = 'amcat.UserProfile'
-LOGIN_REDIRECT_URL = "navigator/"
+LOGIN_REDIRECT_URL = "/navigator/"
 
 ROOT_URLCONF = 'settings.urls'
 

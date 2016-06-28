@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 ###########################################################################
 #          (C) Vrije Universiteit, Amsterdam (the Netherlands)            #
 #                                                                         #
@@ -17,39 +18,13 @@
 # License along with AmCAT.  If not, see <http://www.gnu.org/licenses/>.  #
 ###########################################################################
 
-from __future__ import unicode_literals, print_function, absolute_import
+from .base import *
+from .misc import *
+from .elastic import *
+from .scraping_celery import *
 
+try:
+    from .private import *
+except ImportError:
+    pass
 
-from django.conf.urls import include, patterns, url
-from django.views.generic import RedirectView
-from django.contrib import admin
-from django.conf import settings
-
-from os.path import abspath, dirname, join
-import os; from os.path import isdir
-
-import logging; log = logging.getLogger(__name__)
-
-from navigator.utils.error_handlers import handler404, handler500, handler403, handler503
-
-admin.autodiscover() 
-
-urlpatterns = patterns(
-    '',
-    ('^$', RedirectView.as_view(url='navigator')),
-    (r'^admin/', include(admin.site.urls)),
-    (r'^accounts/', include('accounts.urls')),
-    (r'^navigator/', include('navigator.urls')),
-    (r'^api/', include('api.urls')),
-    (r'^annotator/', include('annotator.urls')),
-    (r'^annotator/', include('annotator.urls')),
-    url(r'^restframework', include('rest_framework.urls', namespace='rest_framework'))
-    )
-
-# Static files
-if settings.LOCAL_DEVELOPMENT:
-    urlpatterns += patterns("django.views",
-        url(r"%s(?P<path>.*)$" % settings.MEDIA_URL[1:], "static.serve", {
-            "document_root": settings.MEDIA_ROOT,
-        })
-    )
